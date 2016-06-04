@@ -25,3 +25,19 @@ subject_data <- rbind(subject_train, subject_test)
 
 
 
+
+###############################################################################
+# Step 2
+# Extract only the measurements on the mean and standard deviation for each measurement
+###############################################################################
+
+features <- read.table("features.txt")
+
+# get only columns with mean() or std() in their names
+mean_and_std_features <- grep("-(mean|std)\\(\\)", features[, 2])
+
+# subset the desired columns
+x_data <- x_data[, mean_and_std_features]
+
+# correct the column names
+names(x_data) <- features[mean_and_std_features, 2]
